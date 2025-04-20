@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KanjiRepository extends JpaRepository<Kanji, Long> {
-	
-}
+    boolean existsByKanji(String kanji);
+} 

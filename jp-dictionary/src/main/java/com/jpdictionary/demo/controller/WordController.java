@@ -16,13 +16,21 @@ public class WordController {
     private WordService wordService;
 
     @GetMapping
-    public List<Word> getAllWords() {
+    public List<Word> getAllWords(@RequestParam(value = "query", required = false) String query) {
+        if (query != null && !query.isEmpty()) {
+            return wordService.searchWords(query);
+        }
         return wordService.getAllWords();
     }
 
     @GetMapping("/{word}")
     public Optional<Word> getWord(@PathVariable String word) {
         return wordService.getWordByName(word);
+    }
+    
+    @GetMapping("/search")
+    public List<Word> searchWords(@RequestParam String query) {
+        return wordService.searchWords(query);
     }
 
     @PostMapping("/fetch/{word}")

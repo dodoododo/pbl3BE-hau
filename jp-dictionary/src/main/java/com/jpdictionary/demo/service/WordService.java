@@ -26,6 +26,10 @@ public class WordService {
     public Optional<Word> getWordByName(String word) {
         return wordRepository.findByWord(word);
     }
+    
+    public List<Word> searchWords(String query) {
+        return wordRepository.findByWordContainingIgnoreCaseOrReadingContainingIgnoreCaseOrMeaningContainingIgnoreCase(query, query, query);
+    }
 
     public Word fetchWordFromAPI(String word) {
         RestTemplate restTemplate = new RestTemplate();
